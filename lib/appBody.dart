@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'checkBoxArea.dart';
 
@@ -62,6 +64,13 @@ class _appBody extends State<appBody> {
         centerTitle: true,
         title:
             Text(GetKey("appbartext"), style: TextStyle(color: Colors.white70)),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => {},
+            child: Text("Dil: $dil", style: TextStyle(color: Colors.white)),
+            style: ButtonStyle(),
+          )
+        ],
       ),
       body: Center(
         child: Column(
@@ -112,7 +121,9 @@ class _appBody extends State<appBody> {
               height: 20,
             ),
             checkBoxArea(
-                localkey: GetKey("numbers"), value: _numbers, onChanged: setNumbers),
+                localkey: GetKey("numbers"),
+                value: _numbers,
+                onChanged: setNumbers),
             Container(
               height: 20,
             )
