@@ -3,6 +3,8 @@ import 'dart:html';
 import 'package:flutter/material.dart';
 import 'checkBoxArea.dart';
 import 'pwdLengthArea.dart';
+import 'specialButton.dart';
+import 'specialListitem.dart';
 
 class appBody extends StatefulWidget {
   @override
@@ -137,22 +139,39 @@ class _appBody extends State<appBody> {
             Container(
               height: 40,
             ),
+            specialButton(
+                width: 200,
+                height: 45,
+                backgroundColor: bizimyesil,
+                foregroundColor: bizimsiyah,
+                text: GetKey("generate"),
+                onPressed: () => {}),
             Container(
-              width: 200,
-              height: 45,
-              child: ElevatedButton(
-                onPressed: () => {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: bizimyesil,
-                  foregroundColor: bizimsiyah,
-                  shadowColor: null
+              height: 40,
+            ),
+            Flexible(
+                child: Container(
+              width: 300,
+              height: 300,
+              color: Color.fromARGB(255, 35, 35, 35),
+              child: Scrollbar(
+                controller: ScrollController(),
+                interactive: true,
+                child: ListView(
+
+                  padding: EdgeInsets.zero,
+                  children: [
+                    specialListitem(text: "yaktın beni dünya"),
+                    specialListitem(text: "asd"),
+                    specialListitem(text: "asd"),
+                    specialListitem(text: "asd"),
+                    specialListitem(text: "asd"),
+                    specialListitem(text: "asd"),
+                    specialListitem(text: "asd"),
+                  ],
                 ),
-                child: Text(GetKey("generate"),style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20
-                )),
-              ),
-            )
+              )
+            ))
           ],
         ),
       ),
