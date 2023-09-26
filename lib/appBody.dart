@@ -33,7 +33,19 @@ class _appBody extends State<appBody> {
     "numbers_eng": "Numbers"
   };
 
-  Map<String, String> DilKey = {"_tr": "TR", "_eng": "ENG"};
+  Map<String, String> DilKey = {"_tr": "images/tur.png", "_eng": "images/uk.png"};
+
+  void changeLanguage() {
+    if (dil == "_tr") {
+      setState(() {
+        dil = '_eng';
+      });
+    } else {
+      setState(() {
+        dil = '_tr';
+      });
+    }
+  }
 
   String GetKey(String key) {
     String ct = "$key$dil";
@@ -68,12 +80,16 @@ class _appBody extends State<appBody> {
         title:
             Text(GetKey("appbartext"), style: TextStyle(color: Colors.white70)),
         actions: <Widget>[
-          ElevatedButton(
-              onPressed: () => {},
-              child: Text(
-                "Dil: ${DilKey[dil]}",
-                style: TextStyle(color: bizimsiyah),
-              ))
+          IconButton(
+            onPressed: () => {
+              changeLanguage()
+            },
+            icon: Image.asset(
+              DilKey[dil].toString(),
+              width: 50,
+              height: 50,
+            ),
+          )
         ],
       ),
       body: Center(
