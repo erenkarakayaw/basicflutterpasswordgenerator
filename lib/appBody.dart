@@ -2,6 +2,7 @@ import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'checkBoxArea.dart';
+import 'pwdLengthArea.dart';
 
 class appBody extends StatefulWidget {
   @override
@@ -31,6 +32,8 @@ class _appBody extends State<appBody> {
     "numbers_tr": "Sayılar",
     "numbers_eng": "Numbers"
   };
+
+  Map<String, String> DilKey = {"_tr": "TR", "_eng": "ENG"};
 
   String GetKey(String key) {
     String ct = "$key$dil";
@@ -65,51 +68,22 @@ class _appBody extends State<appBody> {
         title:
             Text(GetKey("appbartext"), style: TextStyle(color: Colors.white70)),
         actions: <Widget>[
-          TextButton(
-            onPressed: () => {},
-            child: Text("Dil: $dil", style: TextStyle(color: Colors.white)),
-            style: ButtonStyle(),
-          )
+          ElevatedButton(
+              onPressed: () => {},
+              child: Text(
+                "Dil: ${DilKey[dil]}",
+                style: TextStyle(color: bizimsiyah),
+              ))
         ],
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  child: Text(GetKey("pwd"),
-                      style: TextStyle(color: Colors.white)),
-                  width: 200,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      child: Slider(
-                        value: _slidervalue,
-                        max: 32,
-                        min: 4,
-                        onChanged: (e) => {
-                          setSliderVal(e),
-                        },
-                        activeColor: bizimyesil,
-                      ),
-                      width: 200,
-                    ),
-                    Container(
-                      width: 50,
-                      child: Text(
-                        "$_slidervalue",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    )
-                  ],
-                )
-              ],
-            ),
+            pwdLengthArea(
+                value: _slidervalue,
+                text: GetKey("pwd"),
+                onChanged: setSliderVal),
             Container(
               height: 20,
             ),
