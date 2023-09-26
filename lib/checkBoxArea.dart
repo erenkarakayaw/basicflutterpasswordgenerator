@@ -29,7 +29,7 @@ class _checkBoxArea extends State<checkBoxArea> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          width: 100,
+          width: 120,
           child:
               Text(widget.localkey, style: TextStyle(color: Colors.white)),
         ),
@@ -50,7 +50,7 @@ class _checkBoxArea extends State<checkBoxArea> {
           ),
         ),
         Container(
-          width: 70,
+          width: 50,
         )
       ],
     );

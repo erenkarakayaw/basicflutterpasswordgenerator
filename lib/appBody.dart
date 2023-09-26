@@ -16,6 +16,8 @@ class _appBody extends State<appBody> {
 
   bool _numbers = false;
 
+  bool _specialch = false;
+
   Color bizimyesil = Color.fromARGB(255, 112, 148, 122);
 
   Color bizimsiyah = Color.fromARGB(255, 57, 64, 59);
@@ -30,10 +32,17 @@ class _appBody extends State<appBody> {
     "uppercase_tr": "Büyük Harfler",
     "uppercase_eng": "Upper Case",
     "numbers_tr": "Sayılar",
-    "numbers_eng": "Numbers"
+    "numbers_eng": "Numbers",
+    "specialch_tr": "Özel Karakter",
+    "specialch_eng": "Special Character",
+    "generate_tr": "Oluştur",
+    "generate_eng": "Generate"
   };
 
-  Map<String, String> DilKey = {"_tr": "images/tur.png", "_eng": "images/uk.png"};
+  Map<String, String> DilKey = {
+    "_tr": "images/tur.png",
+    "_eng": "images/uk.png"
+  };
 
   void changeLanguage() {
     if (dil == "_tr") {
@@ -70,6 +79,12 @@ class _appBody extends State<appBody> {
     });
   }
 
+  void setSpecialCH(val) {
+    setState(() {
+      _specialch = val as bool;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,9 +96,7 @@ class _appBody extends State<appBody> {
             Text(GetKey("appbartext"), style: TextStyle(color: Colors.white70)),
         actions: <Widget>[
           IconButton(
-            onPressed: () => {
-              changeLanguage()
-            },
+            onPressed: () => {changeLanguage()},
             icon: Image.asset(
               DilKey[dil].toString(),
               width: 50,
@@ -116,6 +129,29 @@ class _appBody extends State<appBody> {
                 onChanged: setNumbers),
             Container(
               height: 20,
+            ),
+            checkBoxArea(
+                localkey: GetKey("specialch"),
+                value: _specialch,
+                onChanged: setSpecialCH),
+            Container(
+              height: 40,
+            ),
+            Container(
+              width: 200,
+              height: 45,
+              child: ElevatedButton(
+                onPressed: () => {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: bizimyesil,
+                  foregroundColor: bizimsiyah,
+                  shadowColor: null
+                ),
+                child: Text(GetKey("generate"),style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20
+                )),
+              ),
             )
           ],
         ),
