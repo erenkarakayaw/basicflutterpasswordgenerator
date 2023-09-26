@@ -7,6 +7,9 @@ class appBody extends StatefulWidget {
 
 class _appBody extends State<appBody> {
   double _slidervalue = 16;
+  bool _uppercase = false;
+  Color bizimyesil = Color.fromARGB(255, 112, 148, 122);
+  Color bizimsiyah = Color.fromARGB(255, 57, 64, 59);
 
   void setSliderVal(double val) {
     setState(() {
@@ -14,18 +17,24 @@ class _appBody extends State<appBody> {
     });
   }
 
+  void setUpperCase(val) {
+    setState(() {
+      _uppercase = val as bool;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 57, 64, 59),
+      backgroundColor: bizimsiyah,
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 112, 148, 122),
+        backgroundColor: bizimyesil,
         centerTitle: true,
         title: Text("Basic Pasword Generator",
             style: TextStyle(color: Colors.white70)),
       ),
       body: Center(
-        child: Row(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Column(
@@ -43,11 +52,11 @@ class _appBody extends State<appBody> {
                       child: Slider(
                         value: _slidervalue,
                         max: 32,
-                        min: 0,
+                        min: 4,
                         onChanged: (e) => {
                           setSliderVal(e),
                         },
-                        activeColor: Color.fromARGB(255, 112, 148, 122),
+                        activeColor: bizimyesil,
                       ),
                       width: 200,
                     ),
@@ -59,6 +68,32 @@ class _appBody extends State<appBody> {
                       ),
                     )
                   ],
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 150,
+                  child:
+                      Text("Upper Case", style: TextStyle(color: Colors.white)),
+                ),
+                Container(
+                  width: 50,
+                  child: Checkbox(
+                    value: _uppercase,
+                    focusColor: bizimyesil,
+                    activeColor: bizimyesil,
+                    
+                    fillColor: MaterialStateProperty.resolveWith((states) {
+                      if (!states.contains(MaterialState.selected)) {
+                        return bizimsiyah;
+                      }
+                      return null;
+                    }),
+                    onChanged: (e) => {setUpperCase(e)},
+                  ),
                 )
               ],
             )

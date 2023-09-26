@@ -8,6 +8,11 @@ class MyApp extends StatelessWidget {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: appBody(),
+        title: "Password Generator",
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          unselectedWidgetColor: Colors.white
+        ),
       );
   }
 
