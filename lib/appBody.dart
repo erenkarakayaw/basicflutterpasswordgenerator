@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'checkBoxArea.dart';
 
 class appBody extends StatefulWidget {
   @override
@@ -8,7 +9,9 @@ class appBody extends StatefulWidget {
 class _appBody extends State<appBody> {
   double _slidervalue = 16;
 
-  bool _uppercase = false;
+  bool _uppercase = true;
+
+  bool _numbers = false;
 
   Color bizimyesil = Color.fromARGB(255, 112, 148, 122);
 
@@ -19,10 +22,12 @@ class _appBody extends State<appBody> {
   Map<String, String> keyler = {
     "appbartext_tr": "Şifre Oluşturucu",
     "appbartext_eng": "Basic Password Generator",
-    "pwd_tr" : "Şifre Uzunluğu",
-    "pwd_eng" : "Password Length",
-    "uppercase_tr" : "Büyük Harfler",
-    "uppercase_eng" : "Upper Case"
+    "pwd_tr": "Şifre Uzunluğu",
+    "pwd_eng": "Password Length",
+    "uppercase_tr": "Büyük Harfler",
+    "uppercase_eng": "Upper Case",
+    "numbers_tr": "Sayılar",
+    "numbers_eng": "Numbers"
   };
 
   String GetKey(String key) {
@@ -39,6 +44,12 @@ class _appBody extends State<appBody> {
   void setUpperCase(val) {
     setState(() {
       _uppercase = val as bool;
+    });
+  }
+
+  void setNumbers(val) {
+    setState(() {
+      _numbers = val as bool;
     });
   }
 
@@ -93,34 +104,17 @@ class _appBody extends State<appBody> {
             Container(
               height: 20,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 80,
-                  child:
-                  Text(GetKey("uppercase"), style: TextStyle(color: Colors.white)),
-                ),
-                Container(
-                  width: 30,
-                  child: Checkbox(
-                    value: _uppercase,
-                    focusColor: bizimyesil,
-                    activeColor: bizimyesil,
-                    side: const BorderSide(color: Colors.white),
-                    fillColor: MaterialStateProperty.resolveWith((states) {
-                      if (!states.contains(MaterialState.selected)) {
-                        return bizimsiyah;
-                      }
-                      return null;
-                    }),
-                    onChanged: (e) => {setUpperCase(e)},
-                  ),
-                ),
-                Container(
-                  width: 90,
-                )
-              ],
+            checkBoxArea(
+                localkey: GetKey("uppercase"),
+                onChanged: setUpperCase,
+                value: _uppercase),
+            Container(
+              height: 20,
+            ),
+            checkBoxArea(
+                localkey: GetKey("numbers"), value: _numbers, onChanged: setNumbers),
+            Container(
+              height: 20,
             )
           ],
         ),
