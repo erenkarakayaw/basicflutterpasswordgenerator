@@ -20,7 +20,7 @@ class _specialButton extends State<specialButton> {
       width: widget.width,
       height: widget.height,
       child: ElevatedButton(
-        onPressed: () => widget.onPressed,
+        onPressed: () => widget.onPressed(),
         style: ElevatedButton.styleFrom(
             backgroundColor: widget.backgroundColor,
             foregroundColor: widget.foregroundColor,

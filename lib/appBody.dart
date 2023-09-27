@@ -5,6 +5,8 @@ import 'checkBoxArea.dart';
 import 'pwdLengthArea.dart';
 import 'specialButton.dart';
 import 'specialListitem.dart';
+import 'passwordGenerator.dart';
+import 'dart:math';
 
 class appBody extends StatefulWidget {
   @override
@@ -27,7 +29,7 @@ class _appBody extends State<appBody> {
   String dil = "_eng";
 
   Map<String, String> keyler = {
-    "appbartext_tr": "Şifre Oluşturucu",
+    "appbartext_tr": "Basit Şifre Oluşturucu",
     "appbartext_eng": "Basic Password Generator",
     "pwd_tr": "Şifre Uzunluğu",
     "pwd_eng": "Password Length",
@@ -38,7 +40,9 @@ class _appBody extends State<appBody> {
     "specialch_tr": "Özel Karakter",
     "specialch_eng": "Special Character",
     "generate_tr": "Oluştur",
-    "generate_eng": "Generate"
+    "generate_eng": "Generate",
+    "copytext_tr": "Metin Kopyalandı",
+    "copytext_eng": "Text Copied."
   };
 
   Map<String, String> DilKey = {
@@ -58,9 +62,17 @@ class _appBody extends State<appBody> {
     }
   }
 
+  List<String> _sifre_liste = [];
+
   String GetKey(String key) {
     String ct = "$key$dil";
     return keyler[ct].toString();
+  }
+
+  void sifreListeGuncelle(String sifre) {
+    setState(() {
+      _sifre_liste.add(sifre);
+    });
   }
 
   void setSliderVal(double val) {
@@ -145,33 +157,35 @@ class _appBody extends State<appBody> {
                 backgroundColor: bizimyesil,
                 foregroundColor: bizimsiyah,
                 text: GetKey("generate"),
-                onPressed: () => {}),
+                onPressed: () => sifreListeGuncelle(PasswordGenerator.Generate(
+                    _slidervalue.toInt(), _uppercase, _specialch, _numbers))),
             Container(
               height: 40,
             ),
             Flexible(
-                child: Container(
-              width: 300,
-              height: 300,
-              color: Color.fromARGB(255, 35, 35, 35),
-              child: Scrollbar(
-                controller: ScrollController(),
-                interactive: true,
-                child: ListView(
-
-                  padding: EdgeInsets.zero,
-                  children: [
-                    specialListitem(text: "yaktın beni dünya"),
-                    specialListitem(text: "asd"),
-                    specialListitem(text: "asd"),
-                    specialListitem(text: "asd"),
-                    specialListitem(text: "asd"),
-                    specialListitem(text: "asd"),
-                    specialListitem(text: "asd"),
-                  ],
+              child: Container(
+                width: 600,
+                height: 300,
+                color: Color.fromARGB(255, 35, 35, 35),
+                child: Scrollbar(
+                  controller: ScrollController(),
+                  interactive: true,
+                  thickness: 25,
+                  thumbVisibility: true,
+                  trackVisibility: true,
+                  child: ListView.builder(
+                    itemCount: _sifre_liste.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return specialListitem(
+                        text: _sifre_liste.reversed.toList()[index],
+                        copytext: GetKey("copytext"),
+                      );
+                    },
+                  ),
                 ),
-              )
-            ))
+              ),
+            ),
+            
           ],
         ),
       ),
