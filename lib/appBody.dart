@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'checkBoxArea.dart';
 import 'pwdLengthArea.dart';
@@ -14,7 +12,7 @@ class appBody extends StatefulWidget {
 }
 
 class _appBody extends State<appBody> {
-  double _slidervalue = 16;
+  double _slidervalue = 4;
 
   bool _uppercase = true;
 
@@ -46,8 +44,8 @@ class _appBody extends State<appBody> {
   };
 
   Map<String, String> DilKey = {
-    "_tr": "images/tur.png",
-    "_eng": "images/uk.png"
+    "_tr": "assets/images/tur.png",
+    "_eng": "assets/images/uk.png"
   };
 
   void changeLanguage() {
@@ -61,6 +59,8 @@ class _appBody extends State<appBody> {
       });
     }
   }
+
+  ScrollController sc = ScrollController();
 
   List<String> _sifre_liste = [];
 
@@ -77,8 +77,9 @@ class _appBody extends State<appBody> {
 
   void setSliderVal(double val) {
     setState(() {
-      _slidervalue = val.toInt() as double;
+      _slidervalue = val as double;
     });
+
   }
 
   void setUpperCase(val) {
@@ -99,6 +100,8 @@ class _appBody extends State<appBody> {
     });
   }
 
+  double _bosvalue = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,15 +109,15 @@ class _appBody extends State<appBody> {
       appBar: AppBar(
         backgroundColor: bizimyesil,
         centerTitle: true,
-        title:
-            Text(GetKey("appbartext"), style: TextStyle(color: Colors.white70)),
+        title: Text(GetKey("appbartext"),
+            style: TextStyle(color: Colors.white70, fontSize: 20)),
         actions: <Widget>[
           IconButton(
             onPressed: () => {changeLanguage()},
             icon: Image.asset(
               DilKey[dil].toString(),
-              width: 50,
-              height: 50,
+              width: 40,
+              height: 40,
             ),
           )
         ],
@@ -168,13 +171,14 @@ class _appBody extends State<appBody> {
                 height: 300,
                 color: Color.fromARGB(255, 35, 35, 35),
                 child: Scrollbar(
-                  controller: ScrollController(),
+                  controller: sc,
                   interactive: true,
                   thickness: 25,
                   thumbVisibility: true,
                   trackVisibility: true,
                   child: ListView.builder(
                     itemCount: _sifre_liste.length,
+                    controller: sc,
                     itemBuilder: (BuildContext context, int index) {
                       return specialListitem(
                         text: _sifre_liste.reversed.toList()[index],
@@ -185,7 +189,6 @@ class _appBody extends State<appBody> {
                 ),
               ),
             ),
-            
           ],
         ),
       ),

@@ -25,19 +25,24 @@ class _pwdLengthArea extends State<pwdLengthArea> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              child: Slider(
-                value: widget.value,
-                max: 32,
-                min: 4,
-                onChanged: (e) => widget.onChanged(e),
-                activeColor: Color.fromARGB(255, 112, 148, 122),
+              child: StatefulBuilder(
+                builder: (context,state) {
+                  return Slider(
+                    value: widget.value,
+                    max: 32,
+                    min: 4,
+                    onChanged: (e) => widget.onChanged(e),
+                    divisions: 28,
+                    activeColor: Color.fromARGB(255, 112, 148, 122),
+                  );
+                },
               ),
               width: 200,
             ),
             Container(
               width: 50,
               child: Text(
-                widget.value.toString(),
+                widget.value.toInt().toString(),
                 style: TextStyle(color: Colors.white),
               ),
             )
